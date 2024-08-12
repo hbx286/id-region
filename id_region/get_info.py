@@ -22,7 +22,6 @@ def get_id_info(id_number: str) -> RegionMessage:
         raise ValueError('Invalid ID number')
 
     code = process_id_number(id_number)
-    print(code)
     birthday = datetime.strptime(code['birthday'], '%Y%m%d').date()
     info = get_address_info(code['address_code'], birthday)
     province, city, district = info.get('province', ''), info.get('city', ''), info.get('district', '')
