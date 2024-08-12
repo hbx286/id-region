@@ -7,6 +7,7 @@ from .helper import check_is_valid, process_id_number, get_address_info
 
 class RegionMessage(TypedDict):
     sex: Annotated[int, '0-unknow, 1-male, 2-female']
+    age: Annotated[int, 'age']
     birthday: Annotated[date, 'birthday']
     abandoned: Annotated[bool, 'is_abandoned: True if is_abandoned == yes else False']
     address: Annotated[str, 'region']
@@ -17,16 +18,18 @@ class RegionMessage(TypedDict):
 
 
 def get_id_info(id_number: str) -> RegionMessage:
-    if check_is_valid(id_number):
+    if not check_is_valid(id_number):
         raise ValueError('Invalid ID number')
 
     code = process_id_number(id_number)
-    birthday = datetime.strptime(code['birthday'], '%Y%m%d')
+    print(code)
+    birthday = datetime.strptime(code['birthday'], '%Y%m%d').date()
     info = get_address_info(code['address_code'], birthday)
     province, city, district = info.get('province', ''), info.get('city', ''), info.get('district', '')
 
     return {
         'sex': 2 if int(code['sequence_code']) % 2 == 0 else 1,
+        'age': date.today().year - birthday.year,
         'birthday': birthday,
         'abandoned': False if address_code.get(code['address_code']) else True,
         'address': f'{province}{city}{district}',

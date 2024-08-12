@@ -11,7 +11,7 @@ def check_is_valid(id_number: str, country: str = 'zh') -> bool:
 
 def process_id_number(id_number: str) -> Dict:
     id_number = id_number.upper()
-    if len(id_number) == 15:
+    if len(id_number) == 18:
         code = {
             'address_code': id_number[:6],
             'birthday': id_number[6:14],
