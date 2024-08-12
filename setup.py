@@ -15,8 +15,8 @@ from setuptools import find_packages, setup, Command
 NAME = 'id-region'
 DESCRIPTION = 'find id region from id card'
 URL = 'https://github.com/hbx286/id-region.git'
-EMAIL = 'me@example.com'
-AUTHOR = 'hbxmail429@gmail.com'
+EMAIL = 'hbxmail429@gmail.com'
+AUTHOR = 'hbx286'
 REQUIRES_PYTHON = '>=3.8.0'
 VERSION = '0.0.1'
 
